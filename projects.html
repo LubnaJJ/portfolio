@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Projects — Lubna Jiffry</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+.page-hero {
+  padding: 160px 56px 80px;
+  background: linear-gradient(160deg, var(--warm) 0%, var(--cream) 70%);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.page-hero-inner { max-width: 1100px; margin: 0 auto; }
+.page-hero-blob { position: absolute; width: 500px; height: 500px; top: -10%; right: -5%; border-radius: 50%; background: radial-gradient(circle, rgba(212,184,224,0.14), transparent 70%); pointer-events: none; }
+.page-hero h1 { font-size: clamp(52px, 7vw, 88px); font-weight: 900; letter-spacing: -3px; line-height: 0.9; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--mauve); }
+.page-hero-sub { font-size: 17px; color: var(--muted); max-width: 480px; line-height: 1.7; }
+
+/* ── SECTION DIVIDER ── */
+.proj-section-divider {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 56px; margin-top: 80px; margin-bottom: 48px;
+}
+.divider-inner {
+  display: flex; align-items: center; gap: 20px;
+}
+.divider-line { flex: 1; height: 1px; background: var(--border); }
+.divider-label {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 24px;
+  border: 1.5px solid var(--border);
+  border-radius: 100px;
+  background: white;
+  white-space: nowrap;
+}
+.divider-emoji { font-size: 16px; }
+.divider-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -0.3px;
+}
+.divider-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; color: var(--muted);
+  letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ── PROJECT CARDS ── */
+.projects-section { padding: 0 0 100px; }
+.projects-inner { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+.projects-list { display: flex; flex-direction: column; gap: 40px; }
+
+.proj-card {
+  border-radius: 32px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: white;
+  transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
+  position: relative;
+}
+.proj-card:hover { transform: translateY(-6px); box-shadow: 0 32px 80px rgba(122,48,72,0.1); }
+.proj-layout { display: grid; grid-template-columns: 1fr 1fr; min-height: 380px; }
+.proj-card:nth-child(even) .proj-layout { direction: rtl; }
+.proj-card:nth-child(even) .proj-info,
+.proj-card:nth-child(even) .proj-visual { direction: ltr; }
+
+.proj-info {
+  padding: 48px; display: flex; flex-direction: column; justify-content: space-between;
+  position: relative; z-index: 1;
+}
+.proj-meta { margin-bottom: 6px; }
+.proj-num {
+  font-family: 'DM Mono', monospace; font-size: 10px;
+  letter-spacing: 2px; color: var(--muted); text-transform: uppercase;
+}
+.proj-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px, 3.5vw, 40px); font-weight: 900;
+  letter-spacing: -1.5px; line-height: 1; margin-bottom: 6px;
+}
+.proj-tagline { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+.proj-desc { color: var(--muted); font-size: 14px; line-height: 1.8; margin-bottom: 20px; flex: 1; }
+.proj-tech { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 24px; }
+.tech-chip {
+  padding: 4px 11px; border-radius: 100px;
+  font-family: 'DM Mono', monospace; font-size: 10px; font-weight: 500;
+  background: rgba(122,48,72,0.06); color: var(--muted); border: 1px solid var(--border);
+}
+.proj-links { display: flex; gap: 10px; flex-wrap: wrap; }
+.proj-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 20px; border-radius: 100px;
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  transition: all 0.25s;
+}
+.proj-btn-ghost {
+  background: rgba(122,48,72,0.06); color: var(--text);
+  border: 1px solid var(--border);
+}
+.proj-btn-ghost:hover { background: rgba(122,48,72,0.1); border-color: rgba(122,48,72,0.2); }
+
+.proj-visual {
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 380px;
+}
+.proj-glow { position: absolute; pointer-events: none; border-radius: 50%; }
+
+/* ── ROSE THEME (Full-stack) ── */
+.theme-rose { background: linear-gradient(135deg, #fff6f8, #ffe0e8); }
+.theme-rose .proj-visual { background: linear-gradient(135deg, #ffe8ef, #ffd0dc); }
+.theme-rose .proj-name { color: var(--deep); }
+.theme-rose .proj-tagline { color: var(--mauve); }
+.theme-rose .proj-btn-primary { background: var(--mauve); color: white; }
+.theme-rose .proj-btn-primary:hover { background: var(--deep); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(122,48,72,0.2); }
+.theme-rose .proj-glow { top:-40%;right:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(244,160,176,0.3),transparent 70%); }
+
+/* ── LILAC THEME ── */
+.theme-lilac { background: linear-gradient(135deg, #f8f4ff, #ede5f8); }
+.theme-lilac .proj-visual { background: linear-gradient(135deg, #e8ddf8, #dccff5); }
+.theme-lilac .proj-name { color: #3d1f6e; }
+.theme-lilac .proj-tagline { color: #8c6aad; }
+.theme-lilac .proj-btn-primary { background: #8c6aad; color: white; }
+.theme-lilac .proj-btn-primary:hover { background: #5a3d8a; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(90,61,138,0.2); }
+.theme-lilac .proj-glow { bottom:-30%;left:-10%;width:400px;height:400px;background:radial-gradient(circle,rgba(212,184,224,0.35),transparent 70%); }
+
+/* ── SAGE THEME ── */
+.theme-sage { background: linear-gradient(135deg, #f2faf7, #ddf0e9); }
+.theme-sage .proj-visual { background: linear-gradient(135deg, #d5edde, #c5e6d2); }
+.theme-sage .proj-name { color: #1f5240; }
+.theme-sage .proj-tagline { color: #5d8c78; }
+.theme-sage .proj-btn-primary { background: #5d8c78; color: white; }
+.theme-sage .proj-btn-primary:hover { background: #3d6b5a; transform: translateY(-2px); }
+.theme-sage .proj-glow { top:-30%;right:-10%;width:380px;height:380px;background:radial-gradient(circle,rgba(168,197,181,0.4),transparent 70%); }
+
+/* ── GOLD THEME ── */
+.theme-gold { background: linear-gradient(135deg, #fffaf3, #ffefd8); }
+.theme-gold .proj-visual { background: linear-gradient(135deg, #ffe8c0, #ffdba0); }
+.theme-gold .proj-name { color: #5c3300; }
+.theme-gold .proj-tagline { color: #c27a30; }
+.theme-gold .proj-btn-primary { background: #c27a30; color: white; }
+.theme-gold .proj-btn-primary:hover { background: #8a5520; transform: translateY(-2px); }
+.theme-gold .proj-glow { top:-30%;left:-10%;width:380px;height:380px;background:radial-gradient(circle,rgba(212,165,116,0.4),transparent 70%); }
+
+/* ── PINK THEME ── */
+.theme-pink { background: linear-gradient(135deg, #fff0f8, #ffe0f0); }
+.theme-pink .proj-visual { background: linear-gradient(135deg, #ffd5e8, #ffc5de); }
+.theme-pink .proj-name { color: #6d1a3e; }
+.theme-pink .proj-tagline { color: #c94f7c; }
+.theme-pink .proj-btn-primary { background: #c94f7c; color: white; }
+.theme-pink .proj-btn-primary:hover { background: #a03060; transform: translateY(-2px); }
+.theme-pink .proj-glow { bottom:-30%;right:-10%;width:380px;height:380px;background:radial-gradient(circle,rgba(244,114,182,0.3),transparent 70%); }
+
+/* ── CREAM THEME ── */
+.theme-cream { background: linear-gradient(135deg, #fffdf8, #fff5e0); }
+.theme-cream .proj-visual { background: linear-gradient(135deg, #ffefc5, #ffe8a5); }
+.theme-cream .proj-name { color: #4a3000; }
+.theme-cream .proj-tagline { color: #c27a30; }
+.theme-cream .proj-btn-primary { background: #c27a30; color: white; }
+.theme-cream .proj-btn-primary:hover { background: #8a5520; transform: translateY(-2px); }
+.theme-cream .proj-glow { top:-30%;left:-10%;width:380px;height:380px;background:radial-gradient(circle,rgba(212,165,116,0.4),transparent 70%); }
+
+/* ── VISUAL MOCKUPS ── */
+/* Kanban mockup */
+.mock-kanban { display:flex;flex-direction:column;gap:10px;padding:28px;width:100%; }
+.kanban-board { display:flex;gap:8px; }
+.kb-col { flex:1;background:rgba(255,255,255,0.6);border:1px solid rgba(244,160,176,0.25);border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px; }
+.kb-col-hd { font-family:'DM Mono',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;display:flex;align-items:center;gap:5px; }
+.kb-dot { width:6px;height:6px;border-radius:50%; }
+.kb-card { background:white;border:1px solid rgba(122,48,72,0.08);border-radius:8px;padding:8px 10px;box-shadow:0 2px 8px rgba(122,48,72,0.06); }
+.kb-card-t { font-size:10px;color:var(--text);font-weight:600;margin-bottom:6px;line-height:1.3; }
+.kb-meta { display:flex;align-items:center;justify-content:space-between; }
+.kb-badge { font-family:'DM Mono',monospace;font-size:8px;padding:2px 6px;border-radius:4px; }
+.kb-av { width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,var(--mauve),var(--deep));display:flex;align-items:center;justify-content:center;font-size:7px;color:white;font-weight:800; }
+.mock-hud { font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px; }
+
+/* PrepWise mockup */
+.mock-pw { display:flex;flex-direction:column;align-items:center;gap:16px;padding:40px;width:100%; }
+.pw-card { background:rgba(255,255,255,0.8);backdrop-filter:blur(10px);border:1px solid rgba(140,106,173,0.2);border-radius:20px;padding:24px 32px;width:100%;max-width:260px;box-shadow:0 8px 32px rgba(140,106,173,0.1); }
+.pw-score { font-family:'Playfair Display',serif;font-size:52px;font-weight:900;color:#8c6aad;line-height:1; }
+.pw-score sup { font-size:22px;color:rgba(140,106,173,0.6); }
+.pw-lbl { font-size:10px;color:rgba(140,106,173,0.6);letter-spacing:2px;text-transform:uppercase;margin-top:4px; }
+.pw-bars { display:flex;flex-direction:column;gap:8px;margin-top:16px; }
+.pw-bar { height:5px;border-radius:100px;background:rgba(140,106,173,0.12); }
+.pw-fill { height:100%;border-radius:100px;background:linear-gradient(to right,#8c6aad,#c94f7c); }
+
+/* AI skin mockup */
+.mock-ai { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;padding:40px;width:100%; }
+.ai-face { width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.6);border:2px solid rgba(93,140,120,0.3);display:flex;align-items:center;justify-content:center;font-size:52px;position:relative;box-shadow:0 8px 32px rgba(93,140,120,0.15); }
+.ai-face::after { content:'';position:absolute;inset:-6px;border-radius:50%;border:1.5px dashed rgba(93,140,120,0.3);animation:spinSlow 8s linear infinite; }
+@keyframes spinSlow { to{transform:rotate(360deg);} }
+.ai-badge { background:rgba(93,140,120,0.1);border:1px solid rgba(93,140,120,0.2);border-radius:10px;padding:10px 20px;font-family:'DM Mono',monospace;font-size:11px;color:#3d6b5a; }
+.ai-types { display:flex;gap:7px;flex-wrap:wrap;justify-content:center; }
+.ai-type { padding:4px 12px;border-radius:100px;font-family:'DM Mono',monospace;font-size:9px;background:rgba(255,255,255,0.6);border:1px solid rgba(93,140,120,0.2);color:#5d8c78; }
+
+/* Void drift mockup */
+.mock-void { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;width:100%;position:relative;overflow:hidden; }
+.void-stars { position:absolute;inset:0; }
+.void-star { position:absolute;width:2px;height:2px;background:rgba(212,165,116,0.6);border-radius:50%;animation:twinkle var(--d,2s) ease-in-out infinite var(--dl,0s); }
+@keyframes twinkle { 0%,100%{opacity:0.2;}50%{opacity:1;} }
+.void-ship { font-size:60px;position:relative;z-index:1;animation:floatShip 3s ease-in-out infinite; }
+@keyframes floatShip { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-12px);} }
+.void-hud { position:relative;z-index:1;background:rgba(255,255,255,0.6);border:1px solid rgba(212,165,116,0.3);border-radius:10px;padding:8px 16px;margin-top:14px;font-family:'DM Mono',monospace;font-size:10px;color:#c27a30;letter-spacing:1px; }
+
+/* Eleve mockup */
+.mock-eleve { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:20px;width:100%; }
+.eleve-logo { font-family:'Playfair Display',serif;font-size:40px;font-style:italic;font-weight:900;color:#6d1a3e; }
+.eleve-sub { font-family:'DM Mono',monospace;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:rgba(201,74,124,0.5); }
+.eleve-btns { display:flex;gap:10px; }
+.eleve-btn { background:rgba(255,255,255,0.6);border:1px solid rgba(201,74,124,0.2);border-radius:10px;padding:10px 18px;font-size:13px;color:#c94f7c;font-weight:600; }
+.eleve-btn.active { background:rgba(201,74,124,0.1); }
+
+/* Ceylon mockup */
+.mock-ceylon { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:18px;width:100%; }
+.ceylon-badge { font-size:60px;animation:floatShip 3.5s ease-in-out infinite; }
+.ceylon-name { font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:#4a3000;letter-spacing:-1px; }
+.ceylon-tags { display:flex;gap:7px;flex-wrap:wrap;justify-content:center; }
+.ceylon-tag { background:rgba(255,255,255,0.6);border:1px solid rgba(212,165,116,0.3);border-radius:100px;padding:4px 12px;font-size:11px;color:#c27a30; }
+
+/* Sola mockup */
+.mock-sola { display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px;gap:16px;width:100%; }
+.sola-sun { font-size:72px;animation:floatShip 3s ease-in-out infinite; }
+.sola-name { font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:#4a2a00;letter-spacing:-1px; }
+.sola-sub { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(194,122,48,0.5); }
+
+/* ── UI/UX grid ── */
+.uiux-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
+.uiux-card {
+  border-radius:24px; border:1px solid var(--border); overflow:hidden;
+  background:white; transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s;
+}
+.uiux-card:hover { transform:translateY(-6px); box-shadow:0 24px 60px rgba(122,48,72,0.1); }
+.uiux-visual { height:220px; display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden; }
+.uiux-info { padding:24px 28px; }
+.uiux-num { font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;text-transform:uppercase; }
+.uiux-name { font-family:'Playfair Display',serif;font-size:22px;font-weight:900;letter-spacing:-0.5px;margin-bottom:4px; }
+.uiux-cat { font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:10px; }
+.uiux-desc { color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:16px; }
+.uiux-pills { display:flex;flex-wrap:wrap;gap:5px;margin-bottom:16px; }
+.uiux-pill { padding:3px 9px;border-radius:100px;font-family:'DM Mono',monospace;font-size:9px;background:rgba(122,48,72,0.05);color:var(--muted);border:1px solid var(--border); }
+.uiux-links { display:flex;gap:8px;flex-wrap:wrap; }
+.uiux-btn { display:inline-flex;align-items:center;gap:5px;padding:8px 16px;border-radius:100px;font-size:12px;font-weight:700;text-decoration:none;transition:all 0.2s; }
+
+@media(max-width:1024px){ .proj-layout,.uiux-grid { grid-template-columns:1fr!important; direction:ltr!important; } .proj-visual { min-height:260px!important; } }
+@media(max-width:768px){ .projects-inner,.proj-section-divider,  .page-hero { padding-left:20px;padding-right:20px; } .proj-info { padding:28px 20px!important; } }
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Lubna <span>Jiffry</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me ✦</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-blob"></div>
+  <div class="page-hero-inner">
+    <div class="section-chip">Work</div>
+    <h1 class="reveal">Projects that<br/><em>ship.</em></h1>
+    <p class="page-hero-sub reveal d1">7 deployed projects spanning AI/ML, full-stack engineering, game development, and design-led frontends.</p>
+  </div>
+</section>
+
+<section class="projects-section">
+
+  <!-- ── FULL-STACK DIVIDER ── -->
+  <div class="proj-section-divider reveal">
+    <div class="divider-inner">
+      <div class="divider-line"></div>
+      <div class="divider-label">
+        <span class="divider-emoji">⚙️</span>
+        <div>
+          <div class="divider-text">Full-Stack & Engineering</div>
+          <div class="divider-sub">Real apps · AI tools · Game dev</div>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <div class="projects-inner">
+    <div class="projects-list">
+
+      <!-- 01 KanbanFlow -->
+      <div class="proj-card theme-rose reveal" id="kanbanflow">
+        <div class="proj-layout">
+          <div class="proj-info">
+            <div>
+              <div class="proj-num">01 · Full-Stack · Real-Time Collaboration</div>
+              <div class="proj-name">KanbanFlow</div>
+              <div class="proj-tagline">Collaborative Project Management</div>
+              <p class="proj-desc">A full-stack Kanban board with real-time collaboration powered by Socket.io. Features drag-and-drop task management across customisable columns, role-based permissions (PM vs Engineer view), sprint planning, burndown chart analytics, and live presence indicators showing who's online. Fully deployed and live on Railway.</p>
+              <div class="proj-tech">
+                <span class="tech-chip">Next.js 14</span><span class="tech-chip">Fastify</span>
+                <span class="tech-chip">PostgreSQL</span><span class="tech-chip">Prisma</span>
+                <span class="tech-chip">Socket.io</span><span class="tech-chip">Zustand</span>
+                <span class="tech-chip">Railway</span><span class="tech-chip">TypeScript</span>
+              </div>
+            </div>
+            <div class="proj-links">
+              <a href="https://proactive-magic-production.up.railway.app" target="_blank" class="proj-btn proj-btn-primary" style="background:var(--mauve);color:white;">Live Demo ↗</a>
+              <a href="https://github.com/LubnaJJ/kanban-flow" target="_blank" class="proj-btn proj-btn-ghost">GitHub ↗</a>
+            </div>
+          </div>
+          <div class="proj-visual">
+            <div class="proj-glow"></div>
+            <div class="mock-kanban">
+              <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">KanbanFlow · Live Board</div>
+              <div class="kanban-board">
+                <div class="kb-col">
+                  <div class="kb-col-hd"><div class="kb-dot" style="background:#94a3b8;"></div>Backlog</div>
+                  <div class="kb-card"><div class="kb-card-t">CI/CD setup</div><div class="kb-meta"><div class="kb-badge" style="background:rgba(212,165,116,0.15);color:#c27a30;">Med</div><div class="kb-av">A</div></div></div>
+                  <div class="kb-card"><div class="kb-card-t">Unit tests</div><div class="kb-meta"><div class="kb-badge" style="background:rgba(212,165,116,0.15);color:#c27a30;">Med</div><div class="kb-av">S</div></div></div>
+                </div>
+                <div class="kb-col">
+                  <div class="kb-col-hd"><div class="kb-dot" style="background:var(--mauve);"></div>In Progress</div>
+                  <div class="kb-card" style="border-color:rgba(196,116,138,0.2);"><div class="kb-card-t">Real-time socket sync</div><div class="kb-meta"><div class="kb-badge" style="background:rgba(196,116,138,0.12);color:var(--mauve);">High</div><div class="kb-av">L</div></div></div>
+                </div>
+                <div class="kb-col">
+                  <div class="kb-col-hd"><div class="kb-dot" style="background:#6cc98a;"></div>Done</div>
+                  <div class="kb-card" style="opacity:0.55;"><div class="kb-card-t" style="text-decoration:line-through;">Auth system</div><div class="kb-meta"><div class="kb-badge" style="background:rgba(108,201,138,0.12);color:#4a9c6a;">✓</div></div></div>
+                </div>
+              </div>
+              <div class="mock-hud">● 2 online · Sprint 1 Active · 4/8 complete</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 PrepWise -->
+      <div class="proj-card theme-lilac reveal" id="prepwise">
+        <div class="proj-layout">
+          <div class="proj-info">
+            <div>
+              <div class="proj-num">02 · AI SaaS · Full-Stack</div>
+              <div class="proj-name">PrepWise</div>
+              <div class="proj-tagline">AI Interview Coach</div>
+              <p class="proj-desc">Full-stack SaaS application with user authentication. Analyses your CV against any job description using LLaMA 3.3 70B via Groq AI — producing a match score, tailored interview questions, a personalised cover letter, and a detailed skills gap report. Also includes a job tracker and an AI-powered CV scorer with PDF upload support.</p>
+              <div class="proj-tech">
+                <span class="tech-chip">Next.js 14</span><span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Supabase</span><span class="tech-chip">Groq AI</span>
+                <span class="tech-chip">LLaMA 3.3 70B</span><span class="tech-chip">PostgreSQL</span>
+                <span class="tech-chip">React</span><span class="tech-chip">Vercel</span>
+              </div>
+            </div>
+            <div class="proj-links">
+              <a href="https://prepwise.vercel.app" target="_blank" class="proj-btn proj-btn-primary" style="background:#8c6aad;color:white;">Live Demo ↗</a>
+              <a href="https://github.com/LubnaJJ/prepwise" target="_blank" class="proj-btn proj-btn-ghost">GitHub ↗</a>
+            </div>
+          </div>
+          <div class="proj-visual">
+            <div class="proj-glow"></div>
+            <div class="mock-pw">
+              <div class="pw-card">
+                <div class="pw-score">87<sup>%</sup></div>
+                <div class="pw-lbl">CV Match Score</div>
+                <div class="pw-bars">
+                  <div class="pw-bar"><div class="pw-fill" style="width:87%;"></div></div>
+                  <div class="pw-bar"><div class="pw-fill" style="width:72%;"></div></div>
+                  <div class="pw-bar"><div class="pw-fill" style="width:94%;"></div></div>
+                </div>
+              </div>
+              <div style="font-family:'DM Mono',monospace;font-size:10px;color:rgba(140,106,173,0.5);letter-spacing:1px;">AI ANALYSIS COMPLETE ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 03 AI Skin Analyzer -->
+      <div class="proj-card theme-sage reveal" id="aiskin">
+        <div class="proj-layout">
+          <div class="proj-info">
+            <div>
+              <div class="proj-num">03 · Computer Vision · AI/ML</div>
+              <div class="proj-name">AI Skin<br/>Analyzer</div>
+              <div class="proj-tagline">Real-time Acne Detection</div>
+              <p class="proj-desc">Computer vision system that detects and classifies acne types in real-time using object detection. YOLOv8 model trained on a custom dataset with implemented dataset balancing to improve performance across diverse skin tones. Features a FastAPI backend connected to a React web interface with live camera feed support.</p>
+              <div class="proj-tech">
+                <span class="tech-chip">YOLOv8</span><span class="tech-chip">PyTorch</span>
+                <span class="tech-chip">OpenCV</span><span class="tech-chip">FastAPI</span>
+                <span class="tech-chip">React</span><span class="tech-chip">Python</span>
+                <span class="tech-chip">JavaScript</span>
+              </div>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/LubnaJJ" target="_blank" class="proj-btn proj-btn-primary" style="background:#5d8c78;color:white;">View on GitHub ↗</a>
+            </div>
+          </div>
+          <div class="proj-visual">
+            <div class="proj-glow"></div>
+            <div class="mock-ai">
+              <div class="ai-face">🔬</div>
+              <div class="ai-badge">DETECTION ACTIVE · 94.2% CONF</div>
+              <div class="ai-types">
+                <span class="ai-type">COMEDONE</span>
+                <span class="ai-type">PAPULE</span>
+                <span class="ai-type">CLEAR</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 04 Void Drift -->
+      <div class="proj-card theme-gold reveal" id="voiddrift">
+        <div class="proj-layout">
+          <div class="proj-info">
+            <div>
+              <div class="proj-num">04 · Game Development · Browser</div>
+              <div class="proj-name">Void Drift</div>
+              <div class="proj-tagline">Browser Space Game</div>
+              <p class="proj-desc">A fully playable browser-based space shooter built from scratch. Features progressive boss fights with unique attack patterns, a weapon upgrade system, and a live global leaderboard powered by Supabase real-time subscriptions. Demonstrates game loop architecture, collision detection, and scalable state management.</p>
+              <div class="proj-tech">
+                <span class="tech-chip">Phaser.js</span><span class="tech-chip">React</span>
+                <span class="tech-chip">TypeScript</span><span class="tech-chip">Supabase</span>
+                <span class="tech-chip">Vite</span><span class="tech-chip">Vercel</span>
+              </div>
+            </div>
+            <div class="proj-links">
+              <a href="https://void-drift-qdz9ss5ed-lubnajjs-projects.vercel.app" target="_blank" class="proj-btn proj-btn-primary" style="background:#c27a30;color:white;">Play Now ↗</a>
+              <a href="https://github.com/LubnaJJ" target="_blank" class="proj-btn proj-btn-ghost">GitHub ↗</a>
+            </div>
+          </div>
+          <div class="proj-visual">
+            <div class="proj-glow"></div>
+            <div class="mock-void">
+              <div class="void-stars">
+                <div class="void-star" style="top:10%;left:15%;--d:2.1s;--dl:0s;"></div>
+                <div class="void-star" style="top:25%;left:80%;--d:1.8s;--dl:0.3s;"></div>
+                <div class="void-star" style="top:60%;left:25%;--d:2.5s;--dl:0.6s;"></div>
+                <div class="void-star" style="top:75%;left:70%;--d:1.6s;--dl:0.9s;"></div>
+                <div class="void-star" style="top:40%;left:50%;--d:2.3s;--dl:0.4s;"></div>
+                <div class="void-star" style="top:15%;left:60%;--d:1.9s;--dl:0.7s;"></div>
+                <div class="void-star" style="top:85%;left:40%;--d:2.2s;--dl:0.2s;"></div>
+                <div class="void-star" style="top:50%;left:90%;--d:1.7s;--dl:0.8s;"></div>
+              </div>
+              <div class="void-ship">🚀</div>
+              <div class="void-hud">SCORE: 48,240 · LEVEL 7 · BOSS INCOMING</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /projects-list -->
+  </div><!-- /projects-inner -->
+
+  <!-- ── UI/UX DIVIDER ── -->
+  <div class="proj-section-divider reveal" style="margin-top:60px;">
+    <div class="divider-inner">
+      <div class="divider-line"></div>
+      <div class="divider-label">
+        <span class="divider-emoji">✨</span>
+        <div>
+          <div class="divider-text">UI / UX & Frontend Design</div>
+          <div class="divider-sub">Brand design · Visual interfaces · Responsive</div>
+        </div>
+      </div>
+      <div class="divider-line"></div>
+    </div>
+  </div>
+
+  <div class="projects-inner">
+    <div class="uiux-grid">
+
+      <!-- 05 Elevé -->
+      <div class="uiux-card reveal d1" id="eleve">
+        <div class="uiux-visual" style="background:linear-gradient(135deg,#fff0f8,#ffd5e8);">
+          <div class="mock-eleve">
+            <div class="eleve-logo">Elevé</div>
+            <div class="eleve-sub">Luxury Beauty Studio</div>
+            <div class="eleve-btns">
+              <div class="eleve-btn active">Book Now</div>
+              <div class="eleve-btn">Services</div>
+            </div>
+          </div>
+        </div>
+        <div class="uiux-info">
+          <div class="uiux-num">05 · UI/UX · Frontend</div>
+          <div class="uiux-name" style="color:#6d1a3e;">Elevé</div>
+          <div class="uiux-cat" style="color:#c94f7c;">Luxury Salon Platform</div>
+          <p class="uiux-desc">Premium salon platform with an editorial luxury aesthetic. Every spacing decision, type choice, and colour was deliberate — demonstrating that great UI is as important as clean code.</p>
+          <div class="uiux-pills">
+            <span class="uiux-pill">HTML/CSS</span>
+            <span class="uiux-pill">JavaScript</span>
+            <span class="uiux-pill">Figma</span>
+            <span class="uiux-pill">UI/UX Design</span>
+          </div>
+          <div class="uiux-links">
+            <a href="https://lubnajj.github.io/Eleve" target="_blank" class="uiux-btn" style="background:rgba(201,79,124,0.12);color:#c94f7c;border:1px solid rgba(201,79,124,0.2);">View Live ↗</a>
+            <a href="https://github.com/LubnaJJ/Eleve" target="_blank" class="uiux-btn" style="background:rgba(122,48,72,0.06);color:var(--muted);border:1px solid var(--border);">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 06 Ceylon Luxe -->
+      <div class="uiux-card reveal d2" id="ceylonluxe">
+        <div class="uiux-visual" style="background:linear-gradient(135deg,#fffaf3,#ffe8c0);">
+          <div class="mock-ceylon">
+            <div class="ceylon-badge">🌴</div>
+            <div class="ceylon-name">Ceylon Luxe</div>
+            <div class="ceylon-tags">
+              <span class="ceylon-tag">Sigiriya</span>
+              <span class="ceylon-tag">Ella</span>
+              <span class="ceylon-tag">Galle</span>
+            </div>
+          </div>
+        </div>
+        <div class="uiux-info">
+          <div class="uiux-num">06 · Travel Design · Frontend</div>
+          <div class="uiux-name" style="color:#4a3000;">Ceylon Luxe</div>
+          <div class="uiux-cat" style="color:#c27a30;">Sri Lanka Travel Platform</div>
+          <p class="uiux-desc">Premium travel booking platform for Sri Lankan tourism with destination showcases, luxury package listings, and an elegant booking interface targeting international travellers.</p>
+          <div class="uiux-pills">
+            <span class="uiux-pill">HTML/CSS</span>
+            <span class="uiux-pill">JavaScript</span>
+            <span class="uiux-pill">Responsive Design</span>
+            <span class="uiux-pill">UI/UX</span>
+          </div>
+          <div class="uiux-links">
+            <a href="https://lubnajj.github.io/Ceylon-Luxe" target="_blank" class="uiux-btn" style="background:rgba(212,165,116,0.15);color:#c27a30;border:1px solid rgba(212,165,116,0.3);">View Live ↗</a>
+            <a href="https://github.com/LubnaJJ/Ceylon-Luxe" target="_blank" class="uiux-btn" style="background:rgba(122,48,72,0.06);color:var(--muted);border:1px solid var(--border);">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 07 Sola -->
+      <div class="uiux-card reveal d3" id="sola">
+        <div class="uiux-visual" style="background:linear-gradient(135deg,#fffdf8,#ffe8c0);">
+          <div class="mock-sola">
+            <div class="sola-sun">☀️</div>
+            <div class="sola-name">Sola</div>
+            <div class="sola-sub">Warm · Clean · Modern</div>
+          </div>
+        </div>
+        <div class="uiux-info">
+          <div class="uiux-num">07 · Web Design · Branding</div>
+          <div class="uiux-name" style="color:#4a2a00;">Sola</div>
+          <div class="uiux-cat" style="color:#c27a30;">Modern Clothing App</div>
+          <p class="uiux-desc">Modern clothing application with a warm sun-inspired aesthetic — demonstrating cohesive brand design from colour and typography through to layout across a full product experience.</p>
+          <div class="uiux-pills">
+            <span class="uiux-pill">HTML/CSS</span>
+            <span class="uiux-pill">JavaScript</span>
+            <span class="uiux-pill">Responsive Design</span>
+            <span class="uiux-pill">Branding</span>
+          </div>
+          <div class="uiux-links">
+            <a href="https://lubnajj.github.io/sola" target="_blank" class="uiux-btn" style="background:rgba(212,165,116,0.15);color:#c27a30;border:1px solid rgba(212,165,116,0.3);">View Live ↗</a>
+            <a href="https://github.com/LubnaJJ" target="_blank" class="uiux-btn" style="background:rgba(122,48,72,0.06);color:var(--muted);border:1px solid var(--border);">GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /uiux-grid -->
+  </div><!-- /projects-inner -->
+
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Lubna <span>Jiffry</span></div>
+        <div class="footer-tagline">Software Engineering Graduate · Sri Lanka 🇱🇰</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 <span>Lubna Janaan Jiffry</span></div>
+      <div class="footer-mono">7 PROJECTS SHIPPED</div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

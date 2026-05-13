@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>About — Lubna Jiffry</title>
+<link rel="stylesheet" href="styles.css"/>
+<style>
+.page-hero {
+  padding: 160px 56px 80px;
+  background: linear-gradient(160deg, var(--warm) 0%, var(--cream) 60%);
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.page-hero-inner { max-width: 1100px; margin: 0 auto; }
+.page-hero-blob { position: absolute; width: 600px; height: 600px; top: -15%; right: -10%; border-radius: 50%; background: radial-gradient(circle, rgba(244,160,176,0.12), transparent 70%); pointer-events: none; }
+.page-hero h1 { font-size: clamp(52px, 7vw, 88px); font-weight: 900; letter-spacing: -3px; line-height: 0.9; margin-bottom: 20px; }
+.page-hero h1 em { font-style: italic; color: var(--mauve); }
+.page-hero-sub { font-size: 17px; color: var(--muted); max-width: 480px; line-height: 1.7; }
+
+/* ── STORY ── */
+.story-section { padding: 100px 0; }
+.story-inner { max-width: 1100px; margin: 0 auto; padding: 0 56px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+.story-sidebar { position: sticky; top: 100px; }
+.story-photo {
+  width: 100%; aspect-ratio: 4/5;
+  border-radius: 32px;
+  background: linear-gradient(145deg, #fce4ec, rgba(212,184,224,0.3));
+  border: 1px solid rgba(196,116,138,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 80px;
+  box-shadow: 0 24px 64px rgba(122,48,72,0.1);
+  margin-bottom: 24px; position: relative; overflow: hidden;
+}
+.story-photo::before {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(to top, rgba(122,48,72,0.1), transparent);
+}
+.story-contact-mini { display: flex; flex-direction: column; gap: 10px; }
+.mini-contact-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 16px; border-radius: 12px;
+  background: white; border: 1px solid var(--border);
+  font-size: 13px; color: var(--text); text-decoration: none;
+  transition: all 0.2s;
+}
+.mini-contact-item:hover { border-color: var(--mauve); transform: translateX(4px); }
+.mini-contact-item span:first-child { font-size: 16px; }
+
+.story-content h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 900; letter-spacing: -1.5px; margin-bottom: 20px; }
+.story-content h2 em { font-style: italic; color: var(--mauve); }
+.story-content p { color: var(--muted); font-size: 15px; line-height: 1.9; margin-bottom: 18px; }
+.story-content p strong { color: var(--text); }
+.story-content p a { color: var(--mauve); text-decoration: none; }
+
+/* ── EXPERIENCE ── */
+.exp-section { padding: 80px 0; background: var(--warm); }
+.exp-inner { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+.exp-header { margin-bottom: 48px; }
+.exp-header h2 { font-size: clamp(32px, 4vw, 48px); font-weight: 900; letter-spacing: -2px; margin-bottom: 8px; }
+.exp-header h2 em { font-style: italic; color: var(--mauve); }
+
+.exp-timeline { position: relative; padding-left: 32px; }
+.exp-timeline::before {
+  content: ''; position: absolute; left: 0; top: 8px; bottom: 0;
+  width: 1px; background: linear-gradient(to bottom, var(--mauve), transparent);
+}
+.exp-item { position: relative; margin-bottom: 48px; }
+.exp-item::before {
+  content: ''; position: absolute; left: -37px; top: 8px;
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--rose); border: 2px solid white;
+  box-shadow: 0 0 0 3px rgba(196,116,138,0.2);
+}
+.exp-period {
+  font-family: 'DM Mono', monospace; font-size: 11px;
+  color: var(--muted); letter-spacing: 1px; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.exp-period::before { content: ''; width: 20px; height: 1px; background: var(--border); }
+.exp-role { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: var(--charcoal); margin-bottom: 4px; }
+.exp-company { color: var(--mauve); font-size: 13px; font-weight: 600; margin-bottom: 14px; }
+.exp-bullets { list-style: none; }
+.exp-bullets li {
+  color: var(--muted); font-size: 14px; line-height: 1.75;
+  margin-bottom: 8px; padding-left: 18px; position: relative;
+}
+.exp-bullets li::before { content: '✦'; position: absolute; left: 0; color: var(--rose); font-size: 9px; top: 5px; }
+
+/* ── EDUCATION ── */
+.edu-section { padding: 80px 0; }
+.edu-inner { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+.edu-header { margin-bottom: 48px; }
+.edu-header h2 { font-size: clamp(32px,4vw,48px); font-weight: 900; letter-spacing: -2px; margin-bottom: 8px; }
+.edu-header h2 em { font-style: italic; color: var(--mauve); }
+.edu-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.edu-card {
+  background: white; border: 1px solid var(--border); border-radius: 24px;
+  padding: 32px; position: relative; overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.edu-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.edu-card-icon { font-size: 32px; margin-bottom: 16px; }
+.edu-card-degree { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; }
+.edu-card-school { color: var(--mauve); font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.edu-card-year { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+.edu-card::after { content: ''; position: absolute; top: -40%; right: -20%; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(244,160,176,0.1), transparent 70%); pointer-events: none; }
+
+/* ── ACHIEVEMENTS ── */
+.ach-section { padding: 80px 0; background: var(--warm); }
+.ach-inner { max-width: 1100px; margin: 0 auto; padding: 0 56px; }
+.ach-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-top: 48px; }
+.ach-card {
+  background: white; border: 1px solid var(--border); border-radius: 20px;
+  padding: 28px; transition: transform 0.3s, box-shadow 0.3s;
+}
+.ach-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.ach-icon { font-size: 28px; margin-bottom: 12px; }
+.ach-title { font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 700; color: var(--charcoal); margin-bottom: 6px; }
+.ach-sub { font-size: 12px; color: var(--muted); }
+
+@media(max-width:1024px){ .story-inner { grid-template-columns: 1fr; } .story-sidebar { position: static; } }
+@media(max-width:768px){ .story-inner, .exp-inner, .edu-inner, .ach-inner, .page-hero { padding-left: 20px; padding-right: 20px; } }
+</style>
+</head>
+<body>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">Lubna <span>Jiffry</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Hire Me ✦</a>
+</nav>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-blob"></div>
+  <div class="page-hero-inner">
+    <div class="section-chip">About Me</div>
+    <h1 class="reveal">The person<br/>behind the<br/><em>code.</em></h1>
+    <p class="page-hero-sub reveal d1">Software Engineering graduate from APIIT Sri Lanka — passionate about building things that are technically solid and genuinely enjoyable to use.</p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="story-inner">
+    <div class="story-sidebar reveal-left">
+      <div class="story-photo">👩‍💻</div>
+      <div class="story-contact-mini">
+        <a href="mailto:janaanlubna@gmail.com" class="mini-contact-item">
+          <span>📧</span><span>janaanlubna@gmail.com</span>
+        </a>
+        <a href="tel:+94725306972" class="mini-contact-item">
+          <span>📱</span><span>+94 72 530 6972</span>
+        </a>
+        <a href="https://linkedin.com/in/lubna-janaan-68934523b" target="_blank" class="mini-contact-item">
+          <span>💼</span><span>LinkedIn</span>
+        </a>
+        <a href="https://github.com/LubnaJJ" target="_blank" class="mini-contact-item">
+          <span>⌨️</span><span>github.com/LubnaJJ</span>
+        </a>
+      </div>
+    </div>
+    <div class="story-content reveal-right">
+      <div class="section-chip">My Story</div>
+      <h2>Builder. <em>Designer.</em> Problem Solver.</h2>
+      <p>I'm <strong>Lubna Janaan Jiffry</strong>, a Software Engineering graduate currently completing my BEng (Hons) at <strong>APIIT Sri Lanka / Staffordshire University</strong>. I build things at the intersection of clean engineering and thoughtful design.</p>
+      <p>My work spans <strong>full-stack web applications, AI/ML tools, browser games, and design-focused frontends</strong>. Whether it's training a YOLOv8 model on custom datasets or crafting a pixel-perfect luxury UI, I bring the same level of care and intention.</p>
+      <p>Before diving into software engineering, I spent time as a <strong>lecturer at Aspire Business School</strong> — teaching Economics and Business Studies to A-Level students. That experience sharpened my communication, planning, and mentoring skills in ways that still show up in how I approach collaborative projects.</p>
+      <p>I also worked as a <strong>Marketing Coordinator at RJ Dezign Studio</strong>, managing social media strategy, campaign analytics, and client communications. This gave me a rare perspective — understanding both the technical side and how products need to connect with real people.</p>
+      <p>Currently based in <strong>Western Province, Kohuwala, Sri Lanka</strong> and open to junior developer roles, internships, and freelance projects — remote or on-site.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:32px;">
+        <a href="projects.html" class="btn-primary">View Projects →</a>
+        <a href="contact.html" class="btn-outline">Get In Touch</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="exp-section">
+  <div class="exp-inner">
+    <div class="exp-header reveal">
+      <div class="section-chip">Work History</div>
+      <h2>Where I've <em>been.</em></h2>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-item reveal d1">
+        <div class="exp-period">Feb 2024 — Jan 2026 · Full Time</div>
+        <div class="exp-role">Marketing Coordinator</div>
+        <div class="exp-company">RJ Dezign Studio</div>
+        <ul class="exp-bullets">
+          <li>Managed social media content, scheduling, and campaign performance tracking across multiple platforms</li>
+          <li>Created marketing materials and maintained website content</li>
+          <li>Coordinated with clients and ensured brand consistency across all communications</li>
+        </ul>
+      </div>
+      <div class="exp-item reveal d2">
+        <div class="exp-period">Feb 2022 — Mar 2023 · Full Time</div>
+        <div class="exp-role">Lecturer</div>
+        <div class="exp-company">Aspire Business School</div>
+        <ul class="exp-bullets">
+          <li>Lectured Edexcel O-Level and A-Level students in Economics and Business Studies</li>
+          <li>Prepared lesson plans, assessments, and study materials tailored to Edexcel curriculum standards</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section class="edu-section">
+  <div class="edu-inner">
+    <div class="edu-header reveal">
+      <div class="section-chip">Education</div>
+      <h2>Where I <em>learned.</em></h2>
+    </div>
+    <div class="edu-cards">
+      <div class="edu-card reveal d1">
+        <div class="edu-card-icon">🎓</div>
+        <div class="edu-card-degree">BEng (Hons) Software Engineering</div>
+        <div class="edu-card-school">Staffordshire University / APIIT Sri Lanka</div>
+        <div class="edu-card-year">2023 — 2026</div>
+      </div>
+      <div class="edu-card reveal d2">
+        <div class="edu-card-icon">📚</div>
+        <div class="edu-card-degree">Edexcel International A-Level</div>
+        <div class="edu-card-school">Aspire Business School</div>
+        <div class="edu-card-year">2021 — 2022</div>
+      </div>
+      <div class="edu-card reveal d3">
+        <div class="edu-card-icon">📱</div>
+        <div class="edu-card-degree">Certificate in Digital Marketing</div>
+        <div class="edu-card-school">Asia Pacific Institute of Digital Marketing</div>
+        <div class="edu-card-year">2020 — 2021</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="ach-section">
+  <div class="ach-inner">
+    <div class="reveal">
+      <div class="section-chip">Recognition</div>
+      <h2 style="font-size:clamp(32px,4vw,48px);font-weight:900;letter-spacing:-2px;margin-bottom:8px;">Achievements & <em style="font-style:italic;color:var(--mauve)">Activities.</em></h2>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card reveal d1">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-title">1st Place — Agile Sprint & UI/UX Design Workshop</div>
+        <div class="ach-sub">APIIT Sri Lanka</div>
+      </div>
+      <div class="ach-card reveal d2">
+        <div class="ach-icon">✍️</div>
+        <div class="ach-title">1st Place — Kagura Twisted Scribblers Poem Contest</div>
+        <div class="ach-sub">APIIT Sri Lanka</div>
+      </div>
+      <div class="ach-card reveal d3">
+        <div class="ach-icon">🤝</div>
+        <div class="ach-title">Club Executive Member — Resolvers Club of Sri Lanka</div>
+        <div class="ach-sub">APIIT · 2023–2024</div>
+      </div>
+      <div class="ach-card reveal d4">
+        <div class="ach-icon">💻</div>
+        <div class="ach-title">Active Member — Computing Full Stack Society</div>
+        <div class="ach-sub">APIIT Sri Lanka</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">Lubna <span>Jiffry</span></div>
+        <div class="footer-tagline">Software Engineering Graduate · Sri Lanka 🇱🇰</div>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="skills.html">Skills</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 <span>Lubna Janaan Jiffry</span></div>
+      <div class="footer-mono">OPEN TO OPPORTUNITIES</div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>
