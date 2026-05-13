@@ -272,34 +272,67 @@
 
 /* responsive */
 @media(max-width:1024px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-right { height: 52vh; min-height: 340px; order: -1; }
-  .hero-left { padding: 56px 40px 48px; }
-  .hero-left::after { display: none; }
   .about-strip-inner { grid-template-columns: 1fr; gap: 40px; }
   .photo-wrap { max-width: 300px; margin: 0 auto; }
   .featured-grid { grid-template-columns: 1fr; }
 }
+
+/* ── MOBILE HERO: single full-viewport column, text sits ON the botanical bg ── */
 @media(max-width:768px) {
-  /* hero */
-  .hero-right { height: 45vh; min-height: 280px; }
-  .hero-left { padding: 56px 20px 40px; }
-  .hero-chip { font-size: 9px; letter-spacing: 2px; padding: 6px 14px; }
-  .hero-name { font-size: clamp(38px,10vw,56px); letter-spacing:-2px; }
-  .hero-role { font-size: 10px; letter-spacing: 2.5px; }
-  .hero-desc { font-size: 14px; margin-bottom: 28px; }
-  .hero-actions { gap: 10px; margin-bottom: 36px; }
-  .hero-actions .btn-primary, .hero-actions .btn-outline { padding: 11px 20px; font-size: 13px; }
-  .hero-stats { gap: 20px; padding-top: 24px; }
-  .stat-num { font-size: 28px; }
+  /* collapse grid — hero becomes a single positioned container */
+  .hero {
+    display: block;
+    position: relative;
+    min-height: 100vh;
+  }
+  /* botanical panel fills the entire hero as a background */
+  .hero-right {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.55; /* soften so text is readable */
+  }
+  /* overlay darkens bottom half so text pops */
+  .hero-banner-overlay {
+    background: linear-gradient(
+      to bottom,
+      rgba(255,248,245,0.3) 0%,
+      rgba(255,248,245,0.75) 40%,
+      rgba(255,248,245,0.95) 75%,
+      var(--cream) 100%
+    );
+  }
+  /* text sits on top of the background */
+  .hero-left {
+    position: relative;
+    z-index: 2;
+    background: transparent;
+    padding: 120px 24px 64px;
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-left::after { display: none; }
+  /* hide floating stat cards — too cluttered on mobile */
+  .hero-float-card { display: none; }
+  .hero-float-badge {
+    position: absolute;
+    top: auto; bottom: 32px; right: 20px;
+    z-index: 5; font-size: 11px; padding: 8px 14px;
+    animation: none;
+  }
+  /* text sizing */
+  .hero-chip { font-size: 9px; letter-spacing: 2px; padding: 6px 14px; margin-bottom: 20px; }
+  .hero-name { font-size: clamp(40px,11vw,60px); letter-spacing: -2px; margin-bottom: 14px; }
+  .hero-role { font-size: 10px; letter-spacing: 2.5px; margin-bottom: 12px; }
+  .hero-divider { margin-bottom: 14px; }
+  .hero-desc { font-size: 14px; margin-bottom: 28px; max-width: 100%; }
+  .hero-actions { gap: 10px; margin-bottom: 36px; flex-wrap: nowrap; }
+  .hero-actions .btn-primary, .hero-actions .btn-outline { padding: 12px 20px; font-size: 13px; }
+  .hero-stats { gap: 24px; padding-top: 24px; }
+  .stat-num { font-size: 30px; }
   .stat-label { font-size: 9px; }
-  .hero-divider { margin-bottom: 16px; }
-  /* floating cards — smaller + repositioned */
-  .hero-float-badge { right: 10px; top: 12px; padding: 8px 14px; font-size: 11px; }
-  .hero-float-card { right: 10px; bottom: 14px; padding: 12px 16px; }
-  .float-card-label { font-size: 8px; margin-bottom: 8px; }
-  .fcs-num { font-size: 20px; } .fcs-lbl { font-size: 9px; }
-  .float-card-stats { gap: 14px; }
+
   /* about strip */
   .about-strip { padding: 60px 0; }
   .about-strip-inner { padding: 0 20px; }
@@ -308,12 +341,14 @@
   .photo-badge { font-size: 11px; padding: 8px 13px; }
   .about-text h2 { font-size: clamp(28px,8vw,40px); }
   .about-text p { font-size: 14px; }
+
   /* featured */
   .featured-section { padding: 60px 0; }
   .featured-inner { padding: 0 20px; }
   .featured-header h2 { font-size: clamp(28px,8vw,40px); }
   .feat-card { padding: 28px 22px; border-radius: 20px; }
   .feat-name { font-size: 22px; }
+
   /* skills teaser */
   .skills-teaser { padding: 60px 0; }
   .skills-teaser-inner { padding: 0 20px; }
@@ -321,11 +356,14 @@
   .skills-bubbles { gap: 8px; }
   .skill-bubble { padding: 7px 14px; font-size: 12px; }
 }
+
 @media(max-width:400px) {
-  .hero-name { font-size: 34px; }
-  .hero-float-badge { display: none; }
+  .hero-name { font-size: 36px; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions .btn-primary, .hero-actions .btn-outline { justify-content: center; }
   .hero-stats { gap: 16px; }
-  .stat-num { font-size: 24px; }
+  .stat-num { font-size: 26px; }
+  .hero-float-badge { display: none; }
 }
 </style>
 </head>
@@ -464,7 +502,7 @@
           ╚═══════════════════════════════════════════════╝
         -->
         <img
-          src="images/profile.jpg"
+          src="images/me.jpeg"
           alt="Lubna Janaan Jiffry"
           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
         />
